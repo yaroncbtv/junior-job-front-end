@@ -138,12 +138,12 @@ export default class UploadFile extends Component {
 
         formData.append('usercv', this.state.profileImg)
 
-        axios.post("http://localhost:4000/users/getUserData", userData, {
+        axios.post(process.env.REACT_APP_API_URL + "/users/getUserData", userData, {
         }).then(res => {
             console.log(res)
         })
 
-        axios.post("http://localhost:4000/users/user-profile", formData, {
+        axios.post(process.env.REACT_APP_API_URL + "/users/user-profile", formData, {
         }).then(res => {
             console.log(res)
         })
