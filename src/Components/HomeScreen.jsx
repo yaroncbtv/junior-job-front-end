@@ -28,7 +28,7 @@ const navigation = [
 
 
 export default function HomeScreen() {
-
+//test
   const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
   const [logOutFlag, setLogOutFlag] = useRecoilState(State.logOutFlag);
   const [modal, setModal] = useRecoilState(State.modal);
