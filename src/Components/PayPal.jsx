@@ -152,7 +152,7 @@ function PayPalContent() {
             jobPlan: jobPlan
           }
         const ResultFromPostJob = await postNewJobs(jobToPublish)
-        // window.location = "/jobs";
+         window.location = "/jobs";
     }
 
 
