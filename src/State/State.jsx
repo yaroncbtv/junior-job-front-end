@@ -107,5 +107,9 @@ export const State = {
       key: 'userTakeTestCheckTestIsActive', 
       default: 0, 
     }),
+    usersTakeTestForJob:atom({
+      key: 'usersTakeTestForJob', 
+      default: [], 
+    }),
 }
 
