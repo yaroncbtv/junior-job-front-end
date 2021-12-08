@@ -96,6 +96,23 @@ export const updateUser = async (data) => {
         console.error(err);
     }
 };
+export const usersTookTest = async (data) => {
+    try {
+        debugger;
+        const resp = await axios.get(baseURL + '/jobs/getUsersTookTest/'+data);
+        return resp.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+export const usersTookTestCount = async (data) => {
+    try {
+        const resp = await axios.get(baseURL + '/jobs/getUsersTookCount', data);
+        return resp.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 export const payPal = async () => {
     try {
