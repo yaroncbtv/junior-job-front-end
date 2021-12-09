@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import UploadCv from './UploadCV/components/UploadCv'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './UploadCV/components/Header';
+import Container from '@mui/material/Container';
 
 import TextField from '@mui/material/TextField';
 import {
@@ -13,6 +14,7 @@ import {
   import JobsNavBar from "./JobsNavBar"
   import Button from '@mui/material/Button';
   import { updateUser } from '../Api/api';
+  import BasicTable from './TableInfo';
 export const UserProfile = () => {
 
 
@@ -82,6 +84,12 @@ export const UserProfile = () => {
       </form>
       {/* <UploadFile/> */}
      
+      </div>
+      <div>
+      <Container maxWidth="lg">
+        <h5>Users That Pass The Test</h5>
+      <BasicTable/>
+      </Container>
       </div>
       {/* <div className="container">
       <Row className="justify-content-md-center">

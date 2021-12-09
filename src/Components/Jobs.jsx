@@ -36,7 +36,7 @@ export const Jobs = () => {
     const [postsPerPage] = useState(10);
 
     useEffect(() => {
-            console.log(allJobs)
+            
     }, []);
 
     const Posts = ({ posts, loading }) => {

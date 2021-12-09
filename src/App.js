@@ -44,7 +44,7 @@ function App() {
       const userData = await getUserData();
       //console.log(userData)
       await setUserInfo(userData);
-
+      
       const allTypeLocPos = await getAllTypeLocPos();
       await setTypelocpos(allTypeLocPos)
 
