@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import { useEffect } from "react";
 import { State } from '../State/State';
 import { MultilineChart } from '@material-ui/icons';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,18 +36,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const HrTable = () => {
     const [usersTakeTestForJob, setUsersTakeTestForJob] = useRecoilState(State.usersTakeTestForJob);
+    var tempArray=[];
+    const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
     useEffect(() => {
         async function fetchMyAPI() {
-            const usersTakeTestForJob = await usersTookTest('61a51b930f3fadfd0440f1e8');
-            await setUsersTakeTestForJob(usersTakeTestForJob);
+
+            if (!!userInfo.numberOfPublishJob) {
+                await Promise.all(userInfo.numberOfPublishJob.map(async (jobId) => { // loop all jobs the user published
+                    const userArray =await usersTookTest(jobId);
+                    tempArray = Object.assign([], tempArray);
+                    return await userArray.map(el=>tempArray.push(el)) // take the users passed the test for specific job
+                    
+                }));
+                await setUsersTakeTestForJob(tempArray); // save all test-passed users from all jobs published and bind to view
+            }
         }
         fetchMyAPI();
     }, []);
+
     const xmpl = usersTakeTestForJob ? usersTakeTestForJob.map((row) => (
         <StyledTableRow key={row.id}>
-            <StyledTableCell align="right">{row.name}</StyledTableCell>
-            <StyledTableCell align="right">{row.email}</StyledTableCell>
-            <StyledTableCell align="right">{row.phone}</StyledTableCell>
+            <StyledTableCell align="center">{row.name}</StyledTableCell>
+            <StyledTableCell align="center">{row.email}</StyledTableCell>
+            <StyledTableCell align="center">{row.phone}</StyledTableCell>
+            <StyledTableCell align="center">{row.jobName}</StyledTableCell>
         </StyledTableRow>
     )) : null;
     return (
@@ -54,9 +67,11 @@ const HrTable = () => {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell align="right">Name</StyledTableCell>
-                        <StyledTableCell align="right">Email</StyledTableCell>
-                        <StyledTableCell align="right">Phone</StyledTableCell>
+                        <StyledTableCell align="center">Name</StyledTableCell>
+                        <StyledTableCell align="center">Email</StyledTableCell>
+                        <StyledTableCell align="center">Phone</StyledTableCell>
+                        <StyledTableCell align="center">Job</StyledTableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
