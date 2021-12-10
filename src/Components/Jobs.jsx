@@ -103,7 +103,7 @@ export const Jobs = () => {
         allJobs.map(function (post) {
             let flag = true;
             post.usersTakeTest.forEach(element => {
-                if(element === userInfo._id){
+                if(element._id === userInfo._id){
                     flag = false;
                 }
             });
