@@ -67,6 +67,7 @@ const checkTest = async () => {
 
 
       } else{
+        console.log("user not pass")
         await saveUserInJobTest(datajob);
       }
 
