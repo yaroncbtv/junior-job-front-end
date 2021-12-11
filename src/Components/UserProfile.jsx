@@ -86,7 +86,7 @@ export const UserProfile = () => {
      
       </div>
       <div>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <h5>Users That Pass The Test</h5>
       <BasicTable/>
       </Container>

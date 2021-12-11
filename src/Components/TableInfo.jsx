@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { getUserData } from "../services/authServices";
+import { getUsersTookTest } from "../Api/api";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,32 +43,61 @@ const rows = [
 ];
 
 export default function BasicTable() {
+
+  const [items, setItems] = React.useState([]);
+
+
+  React.useEffect(() => {
+    async function fetchMyAPI() {
+      const userData = await getUserData();
+      const userTable = await getUsersTookTest(userData.listOfPublishJob)
+      // console.log(userTable)
+
+      setItems(userTable)
+    }
+    fetchMyAPI()
+}, []);
+
+  const table = items.map(function (item) {
+    return(
+      <TableData key={item._id} data={item}/>
+    )
+
+  })
+
+
   return (
-    <TableContainer component={Paper}>
+   <div>
+      {table}
+   </div>
+  );
+}
+
+const TableData = (props) => {
+  return (
+    <div>
+ <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>User Name</StyledTableCell>
-            <StyledTableCell align="right">Is Pass</StyledTableCell>
-            <StyledTableCell align="right">Is Not Pass</StyledTableCell>
-            <StyledTableCell align="right">Error</StyledTableCell>
-            <StyledTableCell align="right">Right</StyledTableCell>
+            <StyledTableCell align="right">Phone</StyledTableCell>
+            <StyledTableCell align="right">Email</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {props.data.usersTakeTest.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell align="right">{row.phone}</StyledTableCell>
+              <StyledTableCell align="right">{row.email}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    </div>
+  )
 }
