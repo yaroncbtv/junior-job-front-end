@@ -1,6 +1,5 @@
 
 import React from "react";
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -10,20 +9,16 @@ import CardHeader from '@mui/material/CardHeader';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/StarBorder';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import ReactDOM from "react-dom";
-import { payPal } from '../Api/api';
 import JobsNavBar from "./JobsNavBar"
-import { useHistory } from "react-router-dom";
 import {
     useRecoilState,
   } from 'recoil';
   import { State } from '../State/State';
-  import { JobHelper } from './Helper';
   import { postNewJobs } from '../Api/api';
 
 
@@ -32,25 +27,22 @@ import {
 
 export const PayPalBtn = (props) => {
     
-    const [question, setQuestion] = useRecoilState(State.question);
+    const [question] = useRecoilState(State.question);
 
   const [jobsState] = useRecoilState(State.jobs);
   const [locationState] = useRecoilState(State.location);
   const [scopeState] = useRecoilState(State.scope);
-  const [jobPlan, setJobPlan] = useRecoilState(State.jobPlan);
+  const [jobPlan] = useRecoilState(State.jobPlan);
 
-  const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
+  const [userInfo] = useRecoilState(State.userInfo);
   
-  const [headLines, setHeadLines] = useRecoilState(State.headLines);
-  const [jobDescription, setJobDescription] = useRecoilState(State.jobDescription);
-  const [jobRequirements, setJobRequirements] = useRecoilState(State.jobRequirements);
+  const [headLines] = useRecoilState(State.headLines);
+  const [jobDescription] = useRecoilState(State.jobDescription);
+  const [jobRequirements] = useRecoilState(State.jobRequirements);
 
-    const [userIsPayPublishJob, setUserIsPayPublishJob] = useRecoilState(State.userIsPayPublishJob);
+    const [, setUserIsPayPublishJob] = useRecoilState(State.userIsPayPublishJob);
     const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
-    const clickToPay = async () => {
-            const resp = await payPal();
-            console.log(resp);
-    }
+    
 
     const createOrder = (data, actions) =>{
         return actions.order.create({
@@ -78,7 +70,7 @@ export const PayPalBtn = (props) => {
             test: question,
             jobPlan: jobPlan
           }
-        const ResultFromPostJob = await postNewJobs(jobToPublish)
+         await postNewJobs(jobToPublish)
         window.location = "/jobs";
         
         return actions.order.capture();
@@ -120,24 +112,23 @@ function Copyright(props) {
 function PayPalContent() {
     
     const [jobPlan, setJobPlan] = useRecoilState(State.jobPlan);
-    let history = useHistory();
     const [ planNumber1, setPlanNumber1 ] = React.useState(false);
     const [ planNumber2, setPlanNumber2 ] = React.useState(false);
     const [ planNumber3, setPlanNumber3 ] = React.useState(false);
     const [ price, setPrice ] = React.useState('0');
-    const [question, setQuestion] = useRecoilState(State.question);
+    const [question] = useRecoilState(State.question);
 
     const [jobsState] = useRecoilState(State.jobs);
     const [locationState] = useRecoilState(State.location);
     const [scopeState] = useRecoilState(State.scope);
   
-    const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
+    const [userInfo] = useRecoilState(State.userInfo);
     
-    const [headLines, setHeadLines] = useRecoilState(State.headLines);
-    const [jobDescription, setJobDescription] = useRecoilState(State.jobDescription);
-    const [jobRequirements, setJobRequirements] = useRecoilState(State.jobRequirements);
+    const [headLines] = useRecoilState(State.headLines);
+    const [jobDescription] = useRecoilState(State.jobDescription);
+    const [jobRequirements,] = useRecoilState(State.jobRequirements);
   
-      const [userIsPayPublishJob, setUserIsPayPublishJob] = useRecoilState(State.userIsPayPublishJob);
+      const [, setUserIsPayPublishJob] = useRecoilState(State.userIsPayPublishJob);
     const freePlan = async () => {
         setUserIsPayPublishJob(true);
         const jobToPublish = {
@@ -151,7 +142,7 @@ function PayPalContent() {
             test: question,
             jobPlan: jobPlan
           }
-        const ResultFromPostJob = await postNewJobs(jobToPublish)
+         await postNewJobs(jobToPublish)
          window.location = "/jobs";
     }
 
@@ -203,30 +194,7 @@ function PayPalContent() {
         },
       ];
       
-      const footers = [
-        {
-          title: 'Company',
-          description: ['Team', 'History', 'Contact us', 'Locations'],
-        },
-        {
-          title: 'Features',
-          description: [
-            'Cool stuff',
-            'Random feature',
-            'Team feature',
-            'Developer stuff',
-            'Another one',
-          ],
-        },
-        {
-          title: 'Resources',
-          description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-        },
-        {
-          title: 'Legal',
-          description: ['Privacy policy', 'Terms of use'],
-        },
-      ];
+      
     const onClickPlanNumber = (tier) => {
             
             if(tier.planNumber === 1){

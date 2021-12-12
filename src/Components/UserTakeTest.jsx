@@ -1,6 +1,4 @@
-import { padding } from "@mui/system";
 import * as React from 'react';
-import { useEffect } from "react";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -10,11 +8,10 @@ import {
   useRecoilState,
 } from 'recoil';
 import { State } from '../State/State';
-import JobsNavBar from "./JobsNavBar"
 import Button from '@mui/material/Button';
 
 export const UserTakeTest  = (props) => {
-  const [userTest, setUserTest] = useRecoilState(State.userTest);
+  const [setUserTest] = useRecoilState(State.userTest);
   const [userTakeTestCheckTestIsActive, setUserTakeTestCheckTestIsActive] = useRecoilState(State.userTakeTestCheckTestIsActive);
 
   const [isCheckedAnswerNumber1, setIsCheckedAnswerNumber1] = React.useState(false);
@@ -77,19 +74,19 @@ export const UserTakeTest  = (props) => {
     )
 }
 
-const root = {
-    display: 'flex',
-    justifyContent:'center',
-    //flexDirection: 'column'
-    flexWrap: 'wrap'
+// const root = {
+//     display: 'flex',
+//     justifyContent:'center',
+//     //flexDirection: 'column'
+//     flexWrap: 'wrap'
 
-  };
+//   };
 
-  const cube = {
-    width:'400px',
-    height:'400px',
-    backgroundColor:'red',
-    margin:'20px',
-    padding:'20px' 
-  };
+//   const cube = {
+//     width:'400px',
+//     height:'400px',
+//     backgroundColor:'red',
+//     margin:'20px',
+//     padding:'20px' 
+//   };
   

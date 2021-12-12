@@ -1,9 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import { margin, width } from '@mui/system';
 import JobsTabs from './JobsTabs'
 import { useHistory } from "react-router-dom";
 import {
@@ -17,10 +14,7 @@ import { JobHelper } from './Helper';
 export default function BasicTextFields() {
     let history = useHistory();
 
-    const GoToStepTo = () => {
-        history.push("/newjob/steptow");
-
-    }
+    
 
     const pickPlan = () => {
       const jobToPublish = {
@@ -52,17 +46,17 @@ export default function BasicTextFields() {
         jobPlan: jobPlan
       }
       
-      const ResultFromPostJob = await postNewJobs(jobToPublish)
+       await postNewJobs(jobToPublish)
     }
-  const [question, setQuestion] = useRecoilState(State.question);
+  const [question] = useRecoilState(State.question);
 
   const [jobsState] = useRecoilState(State.jobs);
   const [locationState] = useRecoilState(State.location);
   const [scopeState] = useRecoilState(State.scope);
-  const [userIsPayPublishJob, setUserIsPayPublishJob] = useRecoilState(State.userIsPayPublishJob);
-  const [jobPlan, setJobPlan] = useRecoilState(State.jobPlan);
+  const [userIsPayPublishJob] = useRecoilState(State.userIsPayPublishJob);
+  const [jobPlan] = useRecoilState(State.jobPlan);
 
-  const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
+  const [userInfo] = useRecoilState(State.userInfo);
   
   const [headLines, setHeadLines] = useRecoilState(State.headLines);
   const [jobDescription, setJobDescription] = useRecoilState(State.jobDescription);
@@ -158,10 +152,7 @@ export default function BasicTextFields() {
   );
 }
 
-const space = {
-    margin:'10px',
-    width:'300px'
-}
+
 const root = {
     display:'flex', 
     justifyContent:'center', 

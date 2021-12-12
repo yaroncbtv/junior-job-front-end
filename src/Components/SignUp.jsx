@@ -32,7 +32,7 @@ export default function SignUp() {
   const [password, setPassword] = useRecoilState(State.password);
   const [password2, setPassword2] = useRecoilState(State.password2);
   const [phone, setPhone] = useRecoilState(State.phone);
-  const [errors, setErrors] = useRecoilState(State.error);
+  const [errors] = useRecoilState(State.error);
   const [error, setError] = React.useState(false);
   const [errorMes, setErrorMes] = React.useState('');
   const [succses, setSuccses] = React.useState(false);
@@ -60,7 +60,7 @@ export default function SignUp() {
            setSuccses(true)
            
         }else{
-          const { name, email, phone, password ,password2 } = data.resp;
+          const { email, password ,password2 } = data.resp;
           console.log(data.resp)
           if(email) setErrorMes(email + '\n');
           if(password) setErrorMes(password + '\n');
@@ -196,12 +196,12 @@ export default function SignUp() {
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               /> */}
               {/* <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
+                Remember mes
               </label> */}
             </div>
 
             <div className="text-sm">
-              <a  className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a href="#/" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Forgot your password?
               </a>
             </div>

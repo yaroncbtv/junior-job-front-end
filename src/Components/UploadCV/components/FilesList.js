@@ -6,7 +6,7 @@ import {
   useRecoilState,
 } from 'recoil';
 import { State } from '../../../State/State';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 const FilesList = () => {
   const [filesList, setFilesList] = useState([]);

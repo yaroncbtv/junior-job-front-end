@@ -10,7 +10,7 @@ import {
 
 export default function Modal() {
   const [open, setOpen] = useState(true)
-  const [modal, setModal] = useRecoilState(State.modal);
+  const [, setModal] = useRecoilState(State.modal);
 
   const cancelButtonRef = useRef(null)
 

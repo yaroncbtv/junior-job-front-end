@@ -1,6 +1,5 @@
 export class JobHelper {
-    constructor() {
-    }
+    
   
     static job;
   

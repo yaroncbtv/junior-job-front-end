@@ -1,8 +1,4 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import UploadCv from './UploadCV/components/UploadCv'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Header from './UploadCV/components/Header';
 import Container from '@mui/material/Container';
 
 import TextField from '@mui/material/TextField';
@@ -10,7 +6,6 @@ import {
     useRecoilState,
   } from 'recoil';
   import { State } from '../State/State';
-  import UploadFile  from './UploadFile';
   import JobsNavBar from "./JobsNavBar"
   import Button from '@mui/material/Button';
   import { updateUser } from '../Api/api';
@@ -18,7 +13,7 @@ import {
 export const UserProfile = () => {
 
 
-    const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
+    const [userInfo] = useRecoilState(State.userInfo);
 
     const [email, setEmail] = React.useState('')
     const [userName, setUserName] = React.useState('')
@@ -35,7 +30,7 @@ export const UserProfile = () => {
         }
       }
       
-        const res = await updateUser(data)
+         await updateUser(data)
     }
 
     React.useEffect(() => {

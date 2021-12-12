@@ -1,6 +1,5 @@
 import axios from "axios";
-import setAuthToken from "./utils/setAuthToken";
-import jwt_decode from "jwt-decode";
+
 
 const baseURL = process.env.REACT_APP_API_URL;
 

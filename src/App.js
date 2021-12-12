@@ -9,8 +9,8 @@ import {
   Route,
 } from "react-router-dom";
 
-import { getCurrentUser, getUserData } from "./services/authServices";
-import { useState, useEffect } from "react";
+import {  getUserData } from "./services/authServices";
+import {  useEffect } from "react";
 import {
   useRecoilState,
 } from 'recoil';
@@ -27,7 +27,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import UploadCv from './Components/UploadCV/components/UploadCv';
 import FilesList from './Components/UploadCV/components/FilesList';
 import { TestJob } from './Components/TestJob';
-import { TestJobField } from './Components/TestJobField';
 import { UserTest } from './Components/UserTest';
 import { PayPal } from './Components/PayPal';
 import { MargeTestJob } from './Components/MargeTestJob';
@@ -35,12 +34,15 @@ import { MargeTestJob } from './Components/MargeTestJob';
 
 function App() {
 
-  const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
-  const [typelocpos, setTypelocpos] = useRecoilState(State.typelocpos);
-  const [allJobs, setAllJobs] = useRecoilState(State.allJobs);
+  const [, setUserInfo] = useRecoilState(State.userInfo);
+  const [, setTypelocpos] = useRecoilState(State.typelocpos);
+  const [, setAllJobs] = useRecoilState(State.allJobs);
+
+ 
 
   useEffect(() => {
-    async function fetchMyAPI() {
+
+    const fetchMyAPI = async () => {
       const userData = await getUserData();
       //console.log(userData)
       await setUserInfo(userData);
@@ -51,7 +53,9 @@ function App() {
       const allJobs = await getAllJobs();
       await setAllJobs(allJobs)
     }
+     
     fetchMyAPI()
+     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   return (

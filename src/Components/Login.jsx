@@ -17,16 +17,13 @@
 import MuiAlert from '@mui/material/Alert';
 import React from 'react';
 
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { State } from '../State/State';
 import {
   useRecoilState,
 } from 'recoil';
-import { userInfoApi } from '../Api/api';
 import { authServices } from "../services/authServices";
-import { getUserToken } from "../services/authServices";
 
 export default function Login() {
 
@@ -36,7 +33,6 @@ export default function Login() {
   const [errors, setErrors] = useRecoilState(State.error);
   const [error, setError] = React.useState(false);
   const [succses, setSuccses] = React.useState(false);
-  const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
 
 
 
@@ -165,7 +161,7 @@ export default function Login() {
             </div>
 
             <div className="text-sm">
-              <a className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a href="#/" className="font-medium text-indigo-600 hover:text-indigo-500">
                 Forgot your password?
               </a>
             </div>

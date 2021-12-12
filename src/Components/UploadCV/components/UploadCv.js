@@ -3,7 +3,6 @@ import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { API_URL } from '../utils/constants';
-import { getUserData } from '../../../services/authServices';
 import {
   useRecoilState,
 } from 'recoil';
@@ -15,13 +14,13 @@ const UploadCv = (props) => {
   const [userInfo] = useRecoilState(State.userInfo);
 
   const [file, setFile] = useState(null); // state for storing actual image
-  const [previewSrc, setPreviewSrc] = useState(''); // state for storing previewImage
+  const [ setPreviewSrc] = useState(''); // state for storing previewImage
   const [state, setState] = useState({
     title: '',
     description: ''
   });
   const [errorMsg, setErrorMsg] = useState('');
-  const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
+  const [ setIsPreviewAvailable] = useState(false); // state to show preview only for images
   const dropRef = useRef(); // React ref for managing the hover state of droppable area
 
   const handleInputChange = (event) => {

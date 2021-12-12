@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -14,16 +13,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import JobMenuCard from './JobMenuCard';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
 import {
   useRecoilState,
 } from 'recoil';
 import { State } from '../State/State';
 import { useHistory } from "react-router-dom";
-import {UserTakeTest} from './UserTakeTest'
 import moment from 'moment';
 import ModalJobs from './ModelJobs';
 import SendIcon from '@mui/icons-material/Send';
@@ -48,7 +44,7 @@ const ExpandMore = styled((props) => {
 export default function JobsList(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [modelJob, setModelJob] = React.useState(false);
-  const [userTakeTest, setUserTakeTest] = useRecoilState(State.userTakeTest);
+  const [, setUserTakeTest] = useRecoilState(State.userTakeTest);
   const [userInfo] = useRecoilState(State.userInfo);
 
   let history = useHistory();
@@ -96,7 +92,7 @@ export default function JobsList(props) {
               aria-controls="long-menu"
               aria-expanded={open ? 'true' : undefined}
               aria-haspopup="true"
-              onClick={handleClick} aria-label="settings"
+              onClick={handleClick} 
             >
               <MoreVertIcon />
             </IconButton>

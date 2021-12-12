@@ -2,10 +2,6 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
-import {
-    useRecoilState,
-  } from 'recoil';
-  import { State } from '../State/State';
   import { useHistory } from "react-router-dom";
 
 export default function ModalJobs() {
@@ -18,9 +14,7 @@ export default function ModalJobs() {
     setOpen(false)
     history.push("/uploadcv");
   }
-  const onClickCancel = () => {
-    setOpen(false)
-  }
+  
 
   return (
     <Transition.Root show={open} as={Fragment}>

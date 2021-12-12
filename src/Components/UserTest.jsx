@@ -1,11 +1,4 @@
-import { padding } from "@mui/system";
 import * as React from 'react';
-import { useEffect } from "react";
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import {
   useRecoilState,
 } from 'recoil';
@@ -19,7 +12,7 @@ import { saveUserInJobTest } from '../Api/api';
 export const UserTest  = (props) => {
     const [userTakeTest] = useRecoilState(State.userTakeTest);
     const [userInfo] = useRecoilState(State.userInfo);
-    const [userTest, setUserTest] = useRecoilState(State.userTest);
+    const [userTest] = useRecoilState(State.userTest);
     const [userTakeTestCheckTestIsActive] = useRecoilState(State.userTakeTestCheckTestIsActive);
     let resultTest;
   if(userTakeTest){
@@ -36,7 +29,7 @@ const checkTest = async () => {
     let error = 0;
     let success = 0;
     let numberOfQuestion = 0;
-    userTest.map(function (item, i) {
+    userTest.forEach(function (item, i) {
         numberOfQuestion++;
         if(
             item.questions.isCheckedAnswerNumber1 === item.userAnswer.isCheckedAnswerNumber1 &&
@@ -71,8 +64,8 @@ const checkTest = async () => {
         await saveUserInJobTest(datajob);
       }
 
-      console.log("error -> " + error + " " + "success -> " + success);
-
+      //console.log("error -> " + error + " " + "success -> " + success);
+      console.log(`error -> ${error} success -> ${success}`)
 }
 
 

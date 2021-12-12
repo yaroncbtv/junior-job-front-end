@@ -5,33 +5,22 @@ import {
     useRecoilState,
 } from 'recoil';
 import { State } from '../State/State';
-import Particles from "react-tsparticles";
-import { useHistory } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { SpinnerDotted } from 'spinners-react';
-import { ConstructionOutlined } from "@mui/icons-material";
 import { styled } from '@mui/material/styles';
 import React, { useEffect, useState } from "react";
 
 export const Jobs = () => {
 
     const [allJobs] = useRecoilState(State.allJobs);
-    let history = useHistory();
 
-    const onClickBtn = () => {
-        history.push("/newjob");
-    }
-
-    const [items, setItems] = React.useState('');
-    const [hasMore, setHasMore] = React.useState(false);
-    const [jobsTabsBtn, setJobsTabsBtn] = useRecoilState(State.jobsTabsBtn);
+    
+    const [jobsTabsBtn] = useRecoilState(State.jobsTabsBtn);
     const [jobsState] = useRecoilState(State.jobs);
     const [locationState] = useRecoilState(State.location);
     const [scopeState] = useRecoilState(State.scope);
     const [userInfo] = useRecoilState(State.userInfo);
 
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
 
@@ -81,11 +70,11 @@ export const Jobs = () => {
       return (
         <nav style={{display:"flex", justifyContent:'center'}}>
           <ul className='pagination'>
-            {pageNumbers.map(number => (
+            {pageNumbers.forEach(number => (
               <li key={number} className='page-item'>
-                <a onClick={() => paginate(number)} className='page-link'>
+                <div onClick={() => paginate(number)} className='page-link'>
                   {number}
-                </a>
+                </div>
               </li>
             ))}
           </ul>
@@ -100,7 +89,7 @@ export const Jobs = () => {
 
         let posts = []
 
-        allJobs.map(function (post) {
+        allJobs.forEach(function (post) {
             let flag = true;
             post.usersTakeTest.forEach(element => {
                 if(element._id === userInfo._id){
@@ -137,6 +126,8 @@ export const Jobs = () => {
     let resultSearch = allJobs.map(function (item, i) {
         if (item.location === locationState && item.scope === scopeState && item.type === jobsState)
             return <div key={item._id} style={{minWidth: '70%'}}><JobsList item={item}/> </div> 
+        else
+            return null
     })
     
 

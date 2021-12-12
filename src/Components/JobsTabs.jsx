@@ -4,9 +4,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import {
-    useWindowSize,
     useWindowWidth,
-    useWindowHeight,
   } from '@react-hook/window-size'
   import { State } from '../State/State';
   import {
@@ -29,7 +27,7 @@ export default function JobsTabs(props) {
 
   useEffect(() => {
     if(typelocpos.length > 0){
-      typelocpos.map(function(element){
+      typelocpos.forEach(function(element){
         setJobsArr(oldArray => [...oldArray, {value:element.type, label:element.type}]);
         setLocationArr(oldArray => [...oldArray, {value:element.location, label:element.location}]);
         setScopeArr(oldArray => [...oldArray, {value:element.scope, label:element.scope}]);
@@ -80,7 +78,6 @@ export default function JobsTabs(props) {
       display="flex" 
       alignItems="center"
       justifyContent="center"
-      alignItems='center'
       marginTop={2}
       marginBottom={2}
     >
