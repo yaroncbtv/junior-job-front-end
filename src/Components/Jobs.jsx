@@ -70,7 +70,7 @@ export const Jobs = () => {
       return (
         <nav style={{display:"flex", justifyContent:'center'}}>
           <ul className='pagination'>
-            {pageNumbers.forEach(number => (
+            {pageNumbers.map(number => (
               <li key={number} className='page-item'>
                 <div onClick={() => paginate(number)} className='page-link'>
                   {number}
@@ -133,7 +133,7 @@ export const Jobs = () => {
 
     let i = 0;
     resultSearch.forEach(element => {
-        if(element === undefined)      
+        if(element === null)      
         i++;
         
     });
