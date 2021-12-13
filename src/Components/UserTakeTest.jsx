@@ -11,7 +11,7 @@ import { State } from '../State/State';
 import Button from '@mui/material/Button';
 
 export const UserTakeTest  = (props) => {
-  const [setUserTest] = useRecoilState(State.userTest);
+  const [,setUserTest] = useRecoilState(State.userTest);
   const [userTakeTestCheckTestIsActive, setUserTakeTestCheckTestIsActive] = useRecoilState(State.userTakeTestCheckTestIsActive);
 
   const [isCheckedAnswerNumber1, setIsCheckedAnswerNumber1] = React.useState(false);
