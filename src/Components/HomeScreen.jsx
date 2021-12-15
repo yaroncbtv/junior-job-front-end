@@ -14,12 +14,12 @@ import  About  from './About';
 import  Modal  from './Modal';
 import { useHistory } from "react-router-dom";
 
-const navigation = [
-  { name: 'Click Me To Go All Jobs', href: '/jobs' },
-  // { name: 'Features', href: 'https://www.google.com/' },
-  // { name: 'Marketplace', href: 'https://www.google.com/' },
-  // { name: 'Company', href: 'https://www.google.com/' },
-]
+// const navigation = [
+//   { name: 'Click Me To Go All Jobs', href: '/jobs' },
+//   // { name: 'Features', href: 'https://www.google.com/' },
+//   // { name: 'Marketplace', href: 'https://www.google.com/' },
+//   // { name: 'Company', href: 'https://www.google.com/' },
+// ]
 
 
 
@@ -53,15 +53,15 @@ export default function HomeScreen() {
     <div className="relative bg-white overflow-hidden">
       <div className="max-w-8xl mx-auto">
         <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <svg
+          {/* <svg
             className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
             fill="currentColor"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <polygon points="50,0 100,0 50,100 0,100" />
-          </svg>
+            <polygon points="70,0 100,0 50,100 0,100" />
+          </svg> */}
 
           <Popover>
             <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
@@ -93,15 +93,15 @@ export default function HomeScreen() {
                     {login ? null : <Link to="/signup">SignUp</Link>}
                   </span>
 
-                  {navigation.map((item) => (
+           
                     <>
                     <Link 
-                    key={login ? item.name : null}
+                   
                     className="font-medium text-gray-500 hover:text-gray-900"
-                    to={login ? item.href : null}
-                    >{login ? item.name : null}</Link>
+                    to={login ? "/jobs" : null}
+                    >{login ? 'Click Me To Go All Jobs' : null}</Link>
                     </>
-                  ))}
+                  
 
                 </div>
               </nav>
@@ -152,28 +152,27 @@ export default function HomeScreen() {
                   }
                   
                   
-                    {navigation.map((item) => (
+               
                       <>
                       <span  className={login ? "block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100" : null}> 
                       <Link 
-                      key={login ? item.name : null}
-                      to={login ? item.href : null}
-                      >{login ? item.name : null}</Link>
+                      to={login ? "/jobs" : null}
+                      >{login ? "Click Me To Go All Jobs" : null}</Link>
                       </span>
                       </>
-                    ))}
+                    
                   </div>
 
                 </div>
               </Popover.Panel>
             </Transition>
           </Popover>
-
+                 
           <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-7xl">
                 {/* <span className="block xl:inline">{userInfo ? "Hello " + "<" + userInfo.name + ">": "Hello " + "<Junior>"}</span>{' '} */}
-                <span className="block xl:inline">{userInfo ? `Hello <${userInfo.name}>` : `Hello <Junior>`}</span>
+                <span className="block xl:inline">{userInfo.name ? `Hello <${userInfo.name}>` : `Hello <Junior>`}</span>
                 <span className="block text-indigo-600 xl:inline">Welcome To Your Next Job!</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">

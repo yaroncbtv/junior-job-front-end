@@ -6,9 +6,10 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// import Paper from '@mui/material/Paper';
 import { getUserData } from "../services/authServices";
 import { getUsersTookTest } from "../Api/api";
+import Divider from '@mui/material/Divider';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,23 +44,29 @@ export default function BasicTable() {
     async function fetchMyAPI() {
       const userData = await getUserData();
       const userTable = await getUsersTookTest(userData.listOfPublishJob)
-      // console.log(userTable)
+      console.log(userTable)
 
       setItems(userTable)
     }
     fetchMyAPI()
 }, []);
 
-  const table = items.map(function (item) {
+  const table = items.map(function (item, index) {
     return(
-      <TableData key={item._id} data={item}/>
+   
+      <div key={index} style={{ marginTop:"30px" }}>
+        <h5>{item.type}</h5>
+          <TableData  key={item._id} data={item}/>
+          <Divider />
+      </div>
+      
     )
 
   })
 
 
   return (
-   <div>
+   <div style={{display:"flex",  flexWrap:'wrap', justifyContent:'space-around'}}>
       {table}
    </div>
   );
@@ -68,13 +75,13 @@ export default function BasicTable() {
 const TableData = (props) => {
   return (
     <div>
- <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+ <TableContainer>
+      <Table sx={{ maxWidth: 400 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>User Name</StyledTableCell>
-            <StyledTableCell align="right">Phone</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
+            <StyledTableCell style={{ width: 160 }} >User Name</StyledTableCell>
+            <StyledTableCell style={{ width: 160 }} align="right">Phone</StyledTableCell>
+            <StyledTableCell style={{ width: 160 }} align="right">Email</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

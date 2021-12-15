@@ -71,7 +71,7 @@ export default function JobsTabs(props) {
    <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': { m: 1, width: '28ch' },
       }}
       noValidate
       autoComplete="off"
