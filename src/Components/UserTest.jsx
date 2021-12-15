@@ -24,6 +24,9 @@ export const UserTest  = (props) => {
     })
 
   }
+
+
+
 const checkTest = async () => {
 
     let error = 0;
@@ -51,11 +54,15 @@ const checkTest = async () => {
         fromUserPassTest: userInfo,
         toPublishJob: userTakeTest
       }
-
-      if(success === numberOfQuestion){
-        
+      
+      const serReqToServer = async () =>{
         await userPassTestSendEmailTo(data);
         await saveUserInJobTest(datajob);
+      }
+
+      if(success === numberOfQuestion){
+       
+        serReqToServer();
         console.log("User Pass The Test")
 
 
@@ -64,8 +71,14 @@ const checkTest = async () => {
         //await saveUserInJobTest(datajob);
       }
 
+      
       //console.log("error -> " + error + " " + "success -> " + success);
       console.log(`error -> ${error} success -> ${success}`)
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      
 }
 
 
@@ -116,11 +129,11 @@ if(userTakeTest){
 
 </div>
 <div style={{ display: 'flex',flexWrap: 'wrap', flexDirection: 'row', alignContent: 'center', justifyContent:'center'}}>
-  <form action="/userTakeTest">
+  {/* <form action="/userTakeTest">
   {resultTest ? <Button disabled={checkBtnIsActive} type="submit" onClick={checkTest} style={{margin:'10px'}} variant="contained">check test and send CV</Button> : null}
   
-  </form>
-{/* {resultTest ? <Button disabled={checkBtnIsActive} type="submit" onClick={checkTest} style={{margin:'10px'}} variant="contained">check test and send CV</Button> : null} */}
+  </form> */}
+{resultTest ? <Button disabled={checkBtnIsActive} type="submit" onClick={checkTest} style={{margin:'10px'}} variant="contained">check test and send CV</Button> : null}
 </div>
 
         </>
