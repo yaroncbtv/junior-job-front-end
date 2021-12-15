@@ -55,7 +55,7 @@ export default function BasicTable() {
     return(
    
       <div key={index} style={{ marginTop:"30px" }}>
-        <h5>{item.type}</h5>
+        <span>{`${item.type} | ${item.location} | ${item.scope}`}</span>
           <TableData  key={item._id} data={item}/>
           <Divider />
       </div>
