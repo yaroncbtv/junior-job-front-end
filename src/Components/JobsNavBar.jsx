@@ -17,6 +17,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkIcon from '@mui/icons-material/Work';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 export default function JobsNavBar() {
     let history = useHistory();
 
@@ -44,6 +45,10 @@ export default function JobsNavBar() {
     }
     const homePage = () => {
       history.push("/");  
+    }
+
+    const userInfoTable = () => {
+      history.push("/HrTableInfo");  
     }
     
     const toggleDrawer = (anchor, open) => (event) => {
@@ -85,6 +90,12 @@ export default function JobsNavBar() {
                 <UploadFileIcon/>
               </ListItemIcon>
               <ListItemText primary={"Upload CV"} />
+            </ListItem>
+            <ListItem onClick={userInfoTable} button key={"User Pass Test"}>
+              <ListItemIcon>
+                <HowToRegIcon/>
+              </ListItemIcon>
+              <ListItemText primary={"User Pass Test"} />
             </ListItem>
         </List>
         <Divider />

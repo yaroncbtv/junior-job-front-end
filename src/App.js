@@ -30,7 +30,7 @@ import { TestJob } from './Components/TestJob';
 import { UserTest } from './Components/UserTest';
 import { PayPal } from './Components/PayPal';
 import { MargeTestJob } from './Components/MargeTestJob';
-
+import { HrTableInfo } from './Components/HrTableInfo';
 
 function App() {
 
@@ -74,6 +74,9 @@ function App() {
             </Route>
             <Route path="/PayPal">
               <PayPal />
+            </Route>
+            <Route path="/HrTableInfo">
+              <HrTableInfo />
             </Route>
             {/* <Route path="/TestJobField">
               <TestJobField />

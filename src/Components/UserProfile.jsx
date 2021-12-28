@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '@mui/material/Container';
 
 import TextField from '@mui/material/TextField';
 import {
@@ -9,7 +8,6 @@ import {
   import JobsNavBar from "./JobsNavBar"
   import Button from '@mui/material/Button';
   import { updateUser } from '../Api/api';
-  import BasicTable from './TableInfo';
 export const UserProfile = () => {
 
 
@@ -80,12 +78,7 @@ export const UserProfile = () => {
       {/* <UploadFile/> */}
      
       </div>
-      <div>
-      <Container maxWidth="lg">
-       
-      <BasicTable/>
-      </Container>
-      </div>
+
       {/* <div className="container">
       <Row className="justify-content-md-center">
     <Col xs lg="5">
