@@ -27,8 +27,8 @@ export const UserTest  = (props) => {
 
 
 
-const checkTest = async () => {
-
+const checkTest = async (event) => {
+  
     let error = 0;
     let success = 0;
     let numberOfQuestion = 0;
@@ -55,17 +55,16 @@ const checkTest = async () => {
         toPublishJob: userTakeTest
       }
       
-      const serReqToServer = async () =>{
-        await userPassTestSendEmailTo(data);
-        await saveUserInJobTest(datajob);
-      }
+   
+
 
       if(success === numberOfQuestion){
-       
-        serReqToServer();
-        console.log("User Pass The Test")
-
-
+        //await saveUserInJobTest(datajob);
+        var dataToSend = {
+          data:data,
+          datajob:datajob
+        }
+        await userPassTestSendEmailTo(dataToSend);
       } else{
         console.log("user not pass")
         //await saveUserInJobTest(datajob);

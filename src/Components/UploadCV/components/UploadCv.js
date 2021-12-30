@@ -14,13 +14,13 @@ const UploadCv = (props) => {
   const [userInfo] = useRecoilState(State.userInfo);
 
   const [file, setFile] = useState(null); // state for storing actual image
-  const [ setPreviewSrc] = useState(''); // state for storing previewImage
+  const [ ,setPreviewSrc] = useState(''); // state for storing previewImage
   const [state, setState] = useState({
     title: '',
     description: ''
   });
   const [errorMsg, setErrorMsg] = useState('');
-  const [ setIsPreviewAvailable] = useState(false); // state to show preview only for images
+  const [ ,setIsPreviewAvailable] = useState(false); // state to show preview only for images
   const dropRef = useRef(); // React ref for managing the hover state of droppable area
 
   const handleInputChange = (event) => {

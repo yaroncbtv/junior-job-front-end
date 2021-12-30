@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { getUserData } from "../services/authServices";
 import { getUsersTookTest } from "../Api/api";
 import Divider from '@mui/material/Divider';
+import { SpinnerDotted } from 'spinners-react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -64,10 +65,28 @@ export default function BasicTable() {
 
   })
 
+  const isLoading = () => {
+    if(items.length>0){
+        return(
+            <div style={{display:"flex",  flexWrap:'wrap', justifyContent:'space-around'}}>
+              {table}
+            </div>  
+        )
+    }else{
+        return(
+            <div style={{display:'flex', justifyContent:'center',alignItems:'center', flexDirection:'column', marginTop:'30px'}}>
+            <SpinnerDotted size={50} thickness={150} speed={100} color="#36ad47" />   
+                        <p>loading...</p>
+            </div>
+        )
+
+    }
+}
+
 
   return (
-   <div style={{display:"flex",  flexWrap:'wrap', justifyContent:'space-around'}}>
-      {table}
+   <div>
+      {isLoading()}
    </div>
   );
 }
