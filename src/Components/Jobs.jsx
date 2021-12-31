@@ -125,7 +125,12 @@ export const Jobs = () => {
 
     let resultSearch = allJobs.map(function (item, i) {
         if (item.location === locationState && item.scope === scopeState && item.type === jobsState)
-            return <div key={item._id} style={{minWidth: '70%'}}><JobsList item={item}/> </div> 
+            return (
+                <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignContent: 'center', justifyContent:'center',minWidth: '70%'}}>
+            <div key={item._id} style={{minWidth: '70%'}}><JobsList item={item}/> </div> 
+            </div>
+            )
+            
         else
             return null
     })
