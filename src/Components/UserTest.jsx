@@ -67,7 +67,8 @@ const checkTest = async (event) => {
         await userPassTestSendEmailTo(dataToSend);
       } else{
         console.log("user not pass")
-        //await saveUserInJobTest(datajob);
+        await saveUserInJobTest(datajob);
+        
       }
 
       
@@ -128,11 +129,11 @@ if(userTakeTest){
 
 </div>
 <div style={{ display: 'flex',flexWrap: 'wrap', flexDirection: 'row', alignContent: 'center', justifyContent:'center'}}>
-  {/* <form action="/userTakeTest">
+  <form action="/userTakeTest">
   {resultTest ? <Button disabled={checkBtnIsActive} type="submit" onClick={checkTest} style={{margin:'10px'}} variant="contained">check test and send CV</Button> : null}
   
-  </form> */}
-{resultTest ? <Button disabled={checkBtnIsActive} type="submit" onClick={checkTest} style={{margin:'10px'}} variant="contained">check test and send CV</Button> : null}
+  </form>
+{/* {resultTest ? <Button disabled={checkBtnIsActive} type="submit" onClick={checkTest} style={{margin:'10px'}} variant="contained">check test and send CV</Button> : null} */}
 </div>
 
         </>
