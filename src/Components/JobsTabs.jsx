@@ -10,7 +10,8 @@ import {
   import {
     useRecoilState,
   } from 'recoil';
-  import { useEffect } from "react";
+//   import { useEffect } from "react";
+// import { getBottomNavigationUtilityClass } from '@mui/material';
 
 export default function JobsTabs(props) {
   const [jobsState, setJobs] = useRecoilState(State.jobs);
@@ -20,21 +21,27 @@ export default function JobsTabs(props) {
   
   const [typelocpos] = useRecoilState(State.typelocpos);
   
-  const [jobsArr, setJobsArr] = React.useState([]);
-  const [locationArr, setLocationArr] = React.useState([]);
-  const [scopeArr, setScopeArr] = React.useState([]);
+  
+  // const [jobsArr, setJobsArr] = React.useState([]);
+  // const [locationArr, setLocationArr] = React.useState([]);
+  // const [scopeArr, setScopeArr] = React.useState([]);
   const [btn, setBtn] = React.useState('Search');
 
-  useEffect(() => {
-    if(typelocpos.length > 0){
-      typelocpos.forEach(function(element){
-        setJobsArr(oldArray => [...oldArray, {value:element.type, label:element.type}]);
-        setLocationArr(oldArray => [...oldArray, {value:element.location, label:element.location}]);
-        setScopeArr(oldArray => [...oldArray, {value:element.scope, label:element.scope}]);
-    });
-  }
-}, [typelocpos]);
+//   useEffect(() => {
+//     // if(typelocpos.length > 0){
+//     //   typelocpos.forEach(function(element){
+//     //     setJobsArr(oldArray => [...oldArray, {value:element.type, label:element.type}]);
+//     //     setLocationArr(oldArray => [...oldArray, {value:element.location, label:element.location}]);
+//     //     setScopeArr(oldArray => [...oldArray, {value:element.scope, label:element.scope}]);
+//     // });
+//         // setJobsArr(typelocpos.type);
+//         // setLocationArr(typelocpos.location);
+//         // setScopeArr(typelocpos.position);
+         
+
+//   //}
   
+// }, [typelocpos]);
   const jobsHandleChange = (event) => {
     setJobs(event.target.value);
   };
@@ -91,11 +98,13 @@ export default function JobsTabs(props) {
           onChange={jobsHandleChange}
           helperText="Please select your job type"
         >
-          {jobsArr.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+          
+          {typelocpos.type ? typelocpos.type.map((option) => (
+            
+            <MenuItem key={option._id} value={option.type}>
+              {option.type}
             </MenuItem>
-          ))}
+          )): <TextField></TextField>}
         </TextField>
         <TextField
           id="outlined-select-currency"
@@ -105,11 +114,11 @@ export default function JobsTabs(props) {
           onChange={locationHandleChange}
           helperText="Please select your location"
         >
-          {locationArr.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+          {typelocpos.location ? typelocpos.location.map((option) => (
+            <MenuItem key={option._id} value={option.location}>
+              {option.location}
             </MenuItem>
-          ))}
+          )): <TextField></TextField>}
         </TextField>
         <TextField
           id="outlined-select-currency"
@@ -119,11 +128,11 @@ export default function JobsTabs(props) {
           onChange={scopeHandleChange}
           helperText="Please select your scope of position"
         >
-          {scopeArr.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+          {typelocpos.position ? typelocpos.position.map((option) => (
+            <MenuItem key={option._id} value={option.position}>
+              {option.position}
             </MenuItem>
-          ))}
+          )): <TextField></TextField>}
         </TextField>
         {ButtonIsNeed}
         </div>

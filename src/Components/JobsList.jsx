@@ -130,7 +130,7 @@ export default function JobsList(props) {
       /> */}
       <CardContent>
         <Typography  variant="subtitle1" gutterBottom component="span">
-          <span style={{ fontWeight: 'bold' }}>{capitalizeFirstLetter(props.item.userId.name)}</span> | {props.item.location} | {props.item.scope} | {props.item.type}
+          <span style={{ fontWeight: 'bold' }}>{capitalizeFirstLetter(props.item.userId.name)}</span> | {props.item.type} | {props.item.location} | {props.item.scope}
         </Typography>
         {/* <Typography variant="body2" color="text.secondary">
 

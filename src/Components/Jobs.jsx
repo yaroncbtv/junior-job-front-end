@@ -98,6 +98,8 @@ export const Jobs = () => {
             });
             if(flag)
                 posts.push(post)
+
+                
         })
 
 
@@ -118,32 +120,76 @@ export const Jobs = () => {
                 </div>
             )
         }
+        
         }
     
 
+        const ListJobsSearch = () => {
 
-
-    let resultSearch = allJobs.map(function (item, i) {
-        if (item.location === locationState && item.scope === scopeState && item.type === jobsState)
-            return (
-                <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignContent: 'center', justifyContent:'center',minWidth: '70%'}}>
-            <div key={item._id} style={{minWidth: '70%'}}><JobsList item={item}/> </div> 
-            </div>
-            )
+            let posts = []
+    
+            allJobs.forEach(function (post) {
+                let flag = true;
+                post.usersTakeTest.forEach(element => {
+                    if(element._id === userInfo._id){
+                        flag = false;
+                    }
+                });
+                if(flag && post.location === locationState && post.scope === scopeState && post.type === jobsState)
+                    posts.push(post)
+    
+                    
+            })
+    
             
-        else
-            return null
-    })
+    
+            if(allJobs.length > 0) {
+                const indexOfLastPost = currentPage * postsPerPage;
+                const indexOfFirstPost = indexOfLastPost - postsPerPage;
+                const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+                const paginate = pageNumber => setCurrentPage(pageNumber);
+                if(posts.length > 0){
+                    return (
+                        <div className='container mt-5'>
+                        <Posts posts={currentPosts} loading={loading} />
+                        <Pagination
+                          postsPerPage={postsPerPage}
+                          totalPosts={allJobs.length}
+                          paginate={paginate}
+                        />
+                        </div>
+                    )
+                }else{
+                   return <Div>{"Sorry, there are currently no results, hope the next time you search will be :)"}</Div>;
+                }
+              
+            }
+            
+            }
+        
+
+
+    // let resultSearch = allJobs.map(function (item, i) {
+    //     if (item.location === locationState && item.scope === scopeState && item.type === jobsState )
+    //         return (
+    //             <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignContent: 'center', justifyContent:'center',minWidth: '70%'}}>
+    //         <div key={item._id} style={{minWidth: '70%'}}><JobsList item={item}/> </div> 
+    //         </div>
+    //         )
+            
+    //     else
+    //         return null
+    // })
     
 
-    let i = 0;
-    resultSearch.forEach(element => {
-        if(element === null)      
-        i++;
+    // let i = 0;
+    // resultSearch.forEach(element => {
+    //     if(element === null)      
+    //     i++;
         
-    });
-    if( i === resultSearch.length)
-    resultSearch = <Div>{"Sorry, there are currently no results, hope the next time you search will be :)"}</Div>;
+    // });
+    // if( i === resultSearch.length)
+    // resultSearch = <Div>{"Sorry, there are currently no results, hope the next time you search will be :)"}</Div>;
 
     
     if (jobsTabsBtn) {
@@ -152,7 +198,7 @@ export const Jobs = () => {
                 <JobsNavBar />
                 <JobsTabs ButtonIsNeed={true} />
                 <div style={{ display: 'flex',flexWrap: 'wrap', flexDirection: 'column', alignContent: 'center', justifyContent:'center'}}>
-                    {resultSearch}
+                    {ListJobsSearch()}
                 </div>
             
             </>
