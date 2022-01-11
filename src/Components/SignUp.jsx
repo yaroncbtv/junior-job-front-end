@@ -24,6 +24,11 @@ import {
 } from 'recoil';
 import { registerUser } from '../Api/api'
 import { useHistory } from "react-router-dom";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 export default function SignUp() {
 
@@ -36,19 +41,21 @@ export default function SignUp() {
   const [error, setError] = React.useState(false);
   const [errorMes, setErrorMes] = React.useState('');
   const [succses, setSuccses] = React.useState(false);
+  const [selected, setSelected] = React.useState('');
   let history = useHistory();
 
   const onClick = async (e) => {
     e.preventDefault();
     setErrorMes('')
     setError(false);
-    if(name && email && phone && password && password2){
+    if(name && email && phone && password && password2 && selected){
       const dataTosend = {
         name: name,
         email: email,
         phone: phone,
         password: password,
-        password2: password2
+        password2: password2,
+        userType: selected
       }
         const data = await registerUser(dataTosend)
 
@@ -81,6 +88,11 @@ export default function SignUp() {
     // setErrors("")
   }
 
+  const handleChange = ev => {
+    setSelected( ev.target.value );
+    
+  };
+  
   const userIsSignup = <Snackbar
   anchorOrigin={{vertical:'bottom', horizontal:'center' }}
   open={succses}
@@ -115,6 +127,15 @@ export default function SignUp() {
               start your 14-day free trial
             </a>
           </p> */}
+        </div>
+        <div >
+        <FormControl component="fieldset">
+      <FormLabel component="legend">Choose what you want to do</FormLabel>
+      <RadioGroup onChange={handleChange} value={selected} row aria-label="Choose what you want to do" name="row-radio-buttons-group">
+        <FormControlLabel  value="1" control={<Radio />} label="Looking for a job" />
+        <FormControlLabel value="2" control={<Radio />} label="Post a job" />   
+      </RadioGroup>
+    </FormControl>
         </div>
         <form className="mt-8 space-y-6" >
           <input type="hidden" name="remember" defaultValue="true" />
@@ -216,7 +237,7 @@ export default function SignUp() {
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
               </span>
-              Sign in
+              Register
             </button>
           </div>
         </form>

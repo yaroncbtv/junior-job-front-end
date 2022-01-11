@@ -18,8 +18,14 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkIcon from '@mui/icons-material/Work';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import {
+  useRecoilState,
+} from 'recoil';
+import { State } from '../State/State';
+
 export default function JobsNavBar() {
     let history = useHistory();
+    const [userInfo] = useRecoilState(State.userInfo);
 
     
 
@@ -59,6 +65,40 @@ export default function JobsNavBar() {
       setState({ ...state, [anchor]: open });
     };
   
+    const publishNewJob = 
+    userInfo.userType === '2' ? 
+    <ListItem onClick={onClickNewJob} button key={"Publish New Job"}>
+              <ListItemIcon>
+                <AddCircleOutlineIcon/>
+              </ListItemIcon>
+              <ListItemText primary={"Publish New Job"} />
+            </ListItem>
+    
+    : null;
+
+     const userPassTest = 
+    userInfo.userType === '2' ? 
+    <ListItem onClick={userInfoTable} button key={"User Pass Test"}>
+    <ListItemIcon>
+      <HowToRegIcon/>
+    </ListItemIcon>
+    <ListItemText primary={"User Pass Test"} />
+  </ListItem>
+    
+    : null;
+
+    const uploadCV = 
+    userInfo.userType === '1' ? 
+    <ListItem onClick={uploadCv} button key={"Upload CV"}>
+              <ListItemIcon>
+                <UploadFileIcon/>
+              </ListItemIcon>
+              <ListItemText primary={"Upload CV"} />
+            </ListItem>
+    
+    : null;
+
+    
     const list = (anchor) => (
       <Box
         sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -67,12 +107,7 @@ export default function JobsNavBar() {
         onKeyDown={toggleDrawer(anchor, false)}
       >
         <List>
-            <ListItem onClick={onClickNewJob} button key={"Publish New Job"}>
-              <ListItemIcon>
-                <AddCircleOutlineIcon/>
-              </ListItemIcon>
-              <ListItemText primary={"Publish New Job"} />
-            </ListItem>
+            {publishNewJob}
             <ListItem onClick={allJobs} button key={"All Jobs"}>
               <ListItemIcon>
                 <WorkIcon/>
@@ -85,18 +120,8 @@ export default function JobsNavBar() {
               </ListItemIcon>
               <ListItemText primary={"My Profile"} />
             </ListItem>
-            <ListItem onClick={uploadCv} button key={"Upload CV"}>
-              <ListItemIcon>
-                <UploadFileIcon/>
-              </ListItemIcon>
-              <ListItemText primary={"Upload CV"} />
-            </ListItem>
-            <ListItem onClick={userInfoTable} button key={"User Pass Test"}>
-              <ListItemIcon>
-                <HowToRegIcon/>
-              </ListItemIcon>
-              <ListItemText primary={"User Pass Test"} />
-            </ListItem>
+            {uploadCV}
+            {userPassTest}
         </List>
         <Divider />
         <List>
