@@ -48,7 +48,7 @@ export default function SignUp() {
     e.preventDefault();
     setErrorMes('')
     setError(false);
-    if(name && email && phone && password && password2 && selected){
+    if(name && email && phone && password && password2 && selected !== ''){
       const dataTosend = {
         name: name,
         email: email,
