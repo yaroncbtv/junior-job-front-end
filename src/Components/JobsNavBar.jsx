@@ -106,6 +106,10 @@ export default function JobsNavBar() {
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
+        <Toolbar >
+          <h5>{"<Junior Job>"}</h5>
+        </Toolbar>
+        <Divider />
         <List>
             {publishNewJob}
             <ListItem onClick={allJobs} button key={"All Jobs"}>
