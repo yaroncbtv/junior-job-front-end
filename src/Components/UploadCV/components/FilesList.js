@@ -41,6 +41,8 @@ const FilesList = () => {
       const result = await axios.get(`${API_URL}/download/${id}`, {
         responseType: 'blob'
       });
+
+      console.log(filesList)
       const split = path.split('/');
       const filename = split[split.length - 1];
       setErrorMsg('');
@@ -73,10 +75,10 @@ const FilesList = () => {
                   <Col className="file-description">{data.files.description}</Col>
                   <Col>
                     <a
-                      href="#/"
-                      onClick={() =>
-                        downloadFile(data._id, data.files.file_path, data.files.file_mimetype)
-                      }
+                      href={data.files.file_path}
+                      // onClick={() =>
+                      //   downloadFile(data._id, data.files.file_path, data.files.file_mimetype)
+                      // }
                     >
                       Download
                     </a>
