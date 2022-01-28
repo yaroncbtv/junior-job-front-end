@@ -46,7 +46,9 @@ export default function JobsList(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [modelJob, setModelJob] = React.useState(false);
   const [, setUserTakeTest] = useRecoilState(State.userTakeTest);
+  
   const [userInfo] = useRecoilState(State.userInfo);
+  const [ userFavoriteJobs,setUserFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
 
   let history = useHistory();
 
@@ -65,6 +67,10 @@ export default function JobsList(props) {
     setAnchorEl(null);
   };
 
+  const onClickUserFavoriteJobs = () =>{
+    setUserFavoriteJobs(userFavoriteJobs => [...userFavoriteJobs, props.item])
+  }
+
   const onClickSendCV = () =>{
     if(userInfo.meta_data.file_path){
       history.push("/userTakeTest");
@@ -74,7 +80,6 @@ export default function JobsList(props) {
     }
     
   }
-
 
   const extendBtnIsNeed = userInfo.userType === '1' ?
   <div>
@@ -117,6 +122,7 @@ export default function JobsList(props) {
     <>
     <Card style={{ margin: '10px', backgroundColor: '#FFFFFF' }} sx={{  maxWidth: 1000 }}>
       <CardHeader
+      
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             {props.item.userId.name[0].toUpperCase()}
@@ -126,6 +132,9 @@ export default function JobsList(props) {
           extendBtnIsNeed
         }
         title={props.item.headLines}
+        titleTypographyProps={{
+          fontSize: 20,
+        }}
         subheader={convertDate}
       />
       {/* <CardMedia
@@ -166,13 +175,13 @@ export default function JobsList(props) {
       
         {userInfo.userType === '1' ? 
          <div>
-             <IconButton aria-label="add to favorites">
+             <IconButton style={{color:"red"}} onClick={onClickUserFavoriteJobs} aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton style={{color:"green"}} aria-label="share">
           <ShareIcon />
         </IconButton>
-        <IconButton onClick={onClickSendCV} aria-label="send cv">
+        <IconButton style={{color:"blue"}} onClick={onClickSendCV} aria-label="send cv">
          <SendIcon />
         </IconButton>
          </div>

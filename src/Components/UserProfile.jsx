@@ -16,7 +16,9 @@ export const UserProfile = () => {
     const [email, setEmail] = React.useState('')
     const [userName, setUserName] = React.useState('')
     const [tel, setTel] = React.useState('')
+    const [userFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
 
+    console.log(userFavoriteJobs)
     const onClickUpdate = async () => {
         
       const data = {
