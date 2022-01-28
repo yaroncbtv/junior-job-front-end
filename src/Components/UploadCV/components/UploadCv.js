@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form,  Button } from 'react-bootstrap';
 import { API_URL } from '../utils/constants';
 import {
   useRecoilState,
@@ -52,7 +52,7 @@ const UploadCv = (props) => {
   };
 
   const handleOnSubmit = async (event) => {
-    // event.preventDefault();
+     //event.preventDefault();
 
     try {
       const { title, description } = state;
@@ -111,13 +111,16 @@ const UploadCv = (props) => {
         </div> */}
       </div>
     </div>
-    <div style={{display:'flex', justifyContent:'center', alignItems:'center',alignContent:'center', marginTop:'50px'}}>
+    <div >
     <React.Fragment >
       <Form className="search-form" onSubmit={handleOnSubmit}>
-        {errorMsg && <p className="errorMsg">{errorMsg}</p>}
-        <Row>
-          <Col>
-            <Form.Group controlId="title">
+        
+       <div style={{display:'flex', justifyContent:'center', alignItems:'center',alignContent:'center', marginTop:'50px',flexWrap:'wrap'}}>
+       
+       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+       
+       <div style={{marginTop:"10px",marginBottom:"10px"}}>
+        <Form.Group controlId="title">
               <Form.Control
                 type="text"
                 name="title"
@@ -126,11 +129,13 @@ const UploadCv = (props) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group controlId="description">
+        </div>
+           
+         
+       
+        
+          <div style={{marginRight:"10px",marginLeft:"10px",marginTop:"10px",marginBottom:"10px"}}>
+          <Form.Group controlId="description">
               <Form.Control
                 type="text"
                 name="description"
@@ -139,9 +144,9 @@ const UploadCv = (props) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <div className="upload-section">
+
+          </div >
+          <div style={{marginTop:"10px",marginBottom:"10px"}} className="upload-section">
           <Dropzone
             onDrop={onDrop}
             onDragEnter={() => updateBorder('over')}
@@ -149,17 +154,20 @@ const UploadCv = (props) => {
           >
             {({ getRootProps, getInputProps }) => (
               
-              <Button  style={{display:'flex', marginTop:'20px', marginBottom:'20px'}} {...getRootProps({ className: 'drop-zone' })} ref={dropRef}>
+              <Button  {...getRootProps({ className: 'drop-zone' })} ref={dropRef}>
                 <input {...getInputProps()} />
                 <p style={{display:'flex',justifyContent:'center', alignItems:'center', margin:'0px'}}>{"click here to select a file "}</p>
-                {file && (
+              </Button>
+            )}
+           
+          </Dropzone>
+          <div>
+          {file && (
                   <div>
                     <strong>{"Selected file:"}</strong> {file.name}
                   </div>
                 )}
-              </Button>
-            )}
-          </Dropzone>
+          </div>
           {/* {previewSrc ? (
             isPreviewAvailable ? (
               <div className="image-preview">
@@ -176,9 +184,17 @@ const UploadCv = (props) => {
             </div>
           )} */}
         </div>
-        <div style={{display:'flex',justifyContent:'center'}}>
+       </div>
+       
+        
+          
+         
+        
+         
+     
+        <div style={{display:'flex',justifyContent:'center',marginTop:'50px'}}>
         <Button variant="success" type="submit">
-          Submit
+          Upload
         </Button>
         </div>
         
@@ -186,8 +202,8 @@ const UploadCv = (props) => {
     </React.Fragment>
 
     </div>
-    <div style={{display:'flex' , flexDirection:'column',justifyContent:'center', alignItems:'center', marginTop:'50px'}}>
-      <h1>my Cv</h1>
+    <div >
+      
       <FilesList/>
     </div>
     </>

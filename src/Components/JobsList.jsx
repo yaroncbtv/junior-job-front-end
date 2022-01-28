@@ -48,7 +48,7 @@ export default function JobsList(props) {
   const [, setUserTakeTest] = useRecoilState(State.userTakeTest);
   
   const [userInfo] = useRecoilState(State.userInfo);
-  const [ userFavoriteJobs,setUserFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
+  const [ ,setUserFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
 
   let history = useHistory();
 

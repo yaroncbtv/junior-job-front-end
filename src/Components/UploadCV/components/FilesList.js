@@ -6,11 +6,11 @@ import {
   useRecoilState,
 } from 'recoil';
 import { State } from '../../../State/State';
-import { Row, Col } from 'react-bootstrap';
+import {  Table } from 'react-bootstrap';
 
 const FilesList = () => {
   const [filesList, setFilesList] = useState([]);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [, setErrorMsg] = useState('');
   const [userInfo] = useRecoilState(State.userInfo);
 
   
@@ -56,9 +56,9 @@ const FilesList = () => {
   return (
     
     <div className="files-container">
-      {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+
       <div className="container">
-      <Row>
+      {/* <Row>
         
         <Row>
           <Col>Title</Col>
@@ -94,7 +94,46 @@ const FilesList = () => {
             </Col>
           )}
        
-        </Row>
+        </Row> */}
+        <h1>My CV</h1>
+        {/* {errorMsg && <p className="errorMsg">{errorMsg}</p>} */}
+<Table striped bordered hover size="lg">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Download File</th>
+    </tr>
+ 
+  {filesList.length > 0 ? (
+            filesList.map(
+              (data, index) => (
+                <tr key={data._id}> 
+      <td>{index + 1}</td>
+      <td>{data.files.title}</td>
+      <td>{data.files.description}</td>
+      <td> <a
+                      href={data.files.file_path}
+                      // onClick={() =>
+                      //   downloadFile(data._id, data.files.file_path, data.files.file_mimetype)
+                      // }
+                    >
+                      Download
+                    </a></td>
+    </tr>
+              )
+            )
+          ) : (
+          
+              <td >
+                No files found. Please add some.
+              </td>
+            
+          )}
+ </thead>
+
+</Table>
 
       </div>
       

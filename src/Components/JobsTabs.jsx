@@ -25,8 +25,8 @@ export default function JobsTabs(props) {
   // const [jobsArr, setJobsArr] = React.useState([]);
   // const [locationArr, setLocationArr] = React.useState([]);
   // const [scopeArr, setScopeArr] = React.useState([]);
-  const [btn, setBtn] = React.useState('Search');
-
+  //const [btn, setBtn] = React.useState('Search');
+  const [btn, setBtn] = useRecoilState(State.btnSearch);
 //   useEffect(() => {
 //     // if(typelocpos.length > 0){
 //     //   typelocpos.forEach(function(element){
@@ -51,6 +51,7 @@ export default function JobsTabs(props) {
   const scopeHandleChange = (event) => {
     setScope(event.target.value);
   };
+  
   const JobsTabsBtn = () => {
     setJobsTabsBtn(!jobsTabsBtn);
     if(jobsTabsBtn) {

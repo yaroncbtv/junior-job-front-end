@@ -111,5 +111,9 @@ export const State = {
       key: 'userFavoriteJobs', 
       default: [], 
     }),
+    btnSearch:atom({
+      key: 'btnSearch', 
+      default: 'Search', 
+    }),
 }
 
