@@ -105,6 +105,24 @@ export const getUsersTookTest = async (data) => {
     }
 };
 
+export const UserLoveJobs = async (data) => {
+    try {
+        const resp = await axios.post(baseURL + '/users/userLoveJobs', data);
+        return resp.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+export const getJobsThatUserLove = async (id) => {
+    try {
+        const resp = await axios.get(baseURL + `/users/getUserLoveJobs/${id}`);
+        return resp.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 export const payPal = async () => {
     try {
         // const data = {

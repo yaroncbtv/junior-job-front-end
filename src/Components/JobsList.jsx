@@ -23,7 +23,9 @@ import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import ModalJobs from './ModelJobs';
 import SendIcon from '@mui/icons-material/Send';
-
+import { UserLoveJobs } from '../Api/api';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const options = [
   'Send CV',
   // 'Atria',
@@ -45,10 +47,12 @@ const ExpandMore = styled((props) => {
 export default function JobsList(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [modelJob, setModelJob] = React.useState(false);
+  const [userLoveJobsFromApiMsg, setUserLoveJobsFromApiMsg] = React.useState('');
+  const [isUserLoveJobsFromApiMsgFlag, setIsUserLoveJobsFromApiMsgFlag] = React.useState(false);
   const [, setUserTakeTest] = useRecoilState(State.userTakeTest);
   
   const [userInfo] = useRecoilState(State.userInfo);
-  const [ ,setUserFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
+  //const [userFavoriteJobs ,setUserFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
 
   let history = useHistory();
 
@@ -67,13 +71,24 @@ export default function JobsList(props) {
     setAnchorEl(null);
   };
 
-  const onClickUserFavoriteJobs = () =>{
-    setUserFavoriteJobs(userFavoriteJobs => [...userFavoriteJobs, props.item])
+  const onClickUserFavoriteJobs = async () =>{
+    //setUserFavoriteJobs(userFavoriteJobs => [...userFavoriteJobs, props.item])
+    const dataToSend = {
+      userInfo: userInfo,
+      jobsInfo: props.item
+    }
+    const result = await UserLoveJobs(dataToSend);
+    setUserLoveJobsFromApiMsg(result);
+    setIsUserLoveJobsFromApiMsgFlag(true);
+    setTimeout(function() {
+      setIsUserLoveJobsFromApiMsgFlag(false);
+    }, 3000);
   }
 
   const onClickSendCV = () =>{
     if(userInfo.meta_data.file_path){
       history.push("/userTakeTest");
+      
       setUserTakeTest(props.item);
     }else{
       setModelJob(true)
@@ -118,6 +133,18 @@ export default function JobsList(props) {
 
   const convertDate = moment(new Date(props.item.date)).format("dddd, MMMM Do YYYY, h:mm:ss a");
   const ModelJob =  modelJob ? <ModalJobs/> : null;
+
+
+  const isSucssesSaveLoveUserJobs = 
+  <Snackbar
+  anchorOrigin={{vertical:'bottom', horizontal:'center' }}
+  open={isUserLoveJobsFromApiMsgFlag}
+  //onClose={handleClose}
+  //key={vertical + horizontal}
+>
+  <MuiAlert severity="success" elevation={6} variant="filled">{userLoveJobsFromApiMsg}</MuiAlert>
+</Snackbar>
+
   return (
     <>
     <Card style={{ margin: '10px', backgroundColor: '#FFFFFF' }} sx={{  maxWidth: 1000 }}>
@@ -214,6 +241,7 @@ export default function JobsList(props) {
       </Collapse>
     </Card>
     {ModelJob}
+    {isSucssesSaveLoveUserJobs}
     </>
   );
 }

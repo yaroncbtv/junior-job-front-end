@@ -32,7 +32,7 @@ export const Jobs = () => {
         if (loading) {
           return <h2>Loading...</h2>;
         }
-
+        
         return (
             <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column', alignContent: 'center', justifyContent:'center'}}>
 

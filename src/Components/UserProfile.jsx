@@ -8,6 +8,9 @@ import {
   import JobsNavBar from "./JobsNavBar"
   import Button from '@mui/material/Button';
   import { updateUser } from '../Api/api';
+  import { getJobsThatUserLove } from '../Api/api';
+  import JobsList from "./JobsList";
+  import { SpinnerDotted } from 'spinners-react';
 export const UserProfile = () => {
 
 
@@ -16,9 +19,10 @@ export const UserProfile = () => {
     const [email, setEmail] = React.useState('')
     const [userName, setUserName] = React.useState('')
     const [tel, setTel] = React.useState('')
+    const [getUserLoveJobs, setGetUserLoveJobs] = React.useState([])
     const [userFavoriteJobs] = useRecoilState(State.userFavoriteJobs);
 
-    console.log(userFavoriteJobs)
+    
     const onClickUpdate = async () => {
         
       const data = {
@@ -37,7 +41,38 @@ export const UserProfile = () => {
         setEmail(userInfo.email);
         setUserName(userInfo.name);
         setTel(userInfo.phone);
+
+        const fetchMyAPI = async () => {
+          
+          if(userInfo._id){
+            const getJobsThatUserLoveData = await getJobsThatUserLove(userInfo._id);
+            await setGetUserLoveJobs(getJobsThatUserLoveData)
+          }
+        }
+         
+        fetchMyAPI()
+
     }, [userInfo]);
+
+    const isLoading = () => {
+      if(getUserLoveJobs.length>0){
+          return(
+            <div style={{ display: 'flex', flexWrap:'wrap', alignContent: 'center', justifyContent:'center', alignItems:'center'}}>
+            {getUserLoveJobs.map(function (post) {
+                          return <div key={post._id} ><JobsList item={post}/></div>
+                      })}
+            </div>
+          )
+      }else{
+          return(
+<div style={{display:'flex', justifyContent:'center',alignItems:'center', flexDirection:'column'}}>
+<SpinnerDotted size={50} thickness={150} speed={100} color="#36ad47" />   
+              <p>loading...</p>
+</div>
+          )
+  
+      }
+  }
 
     return(
         <>
@@ -78,7 +113,7 @@ export const UserProfile = () => {
 
       </form>
       {/* <UploadFile/> */}
-     
+      
       </div>
 
       {/* <div className="container">
@@ -94,6 +129,8 @@ export const UserProfile = () => {
     <div className="main-content">
      
       </div> */}
+      
+      {isLoading()}
         </>
     )
 }
