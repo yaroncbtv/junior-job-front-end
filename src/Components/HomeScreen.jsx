@@ -13,6 +13,7 @@ import { State } from '../State/State';
 import  About  from './About';
 import  Modal  from './Modal';
 import { useHistory } from "react-router-dom";
+import Loading from 'react-fullscreen-loading';
 
 // const navigation = [
 //   { name: 'Click Me To Go All Jobs', href: '/jobs' },
@@ -31,8 +32,9 @@ export default function HomeScreen() {
   const [modal, setModal] = useRecoilState(State.modal);
   let history = useHistory();
 
+
   let login = false;
-  if (userInfo) {
+  if (localStorage.getItem("token")) {
     login = true;
   }else{
     login = false;
@@ -228,6 +230,7 @@ export default function HomeScreen() {
 
     </div>
   )
+
 }
 
 

@@ -8,30 +8,31 @@ import {
 import { State } from '../../../State/State';
 import {  Table } from 'react-bootstrap';
 
-const FilesList = () => {
-  const [filesList, setFilesList] = useState([]);
+const FilesList = ({ fileListData }) => {
+  const [filesList, setFilesList] = useState(State.filesList);
   const [, setErrorMsg] = useState('');
   const [userInfo] = useRecoilState(State.userInfo);
 
   
   useEffect(() => {
 
-    const getFilesList = async () => {
-      try {
-        if(userInfo._id != null){
-          const { data } = await axios.post(`${API_URL}/getAllFiles`, {userId:userInfo._id});
-          setErrorMsg('');
-          setFilesList(filesList => [...filesList, data]);
+    // const getFilesList = async () => {
+    //   try {
+    //     if(userInfo._id != null){
+    //       const { data } = await axios.post(`${API_URL}/getAllFiles`, {userId:userInfo._id});
+    //       setErrorMsg('');
+    //       const arrayData = [data];
+    //       setFilesList(arrayData);
 
-          //setFilesList(data);
-        }
+    //       //setFilesList(data);
+    //     }
         
-      } catch (error) {
-        error.response && setErrorMsg(error.response.data);
-      }
-    };
+    //   } catch (error) {
+    //     error.response && setErrorMsg(error.response.data);
+    //   }
+    // };
 
-    getFilesList();
+    // getFilesList();
   }, [userInfo]);
 
   // const downloadFile = async (id, path, mimetype) => {
@@ -106,8 +107,8 @@ const FilesList = () => {
       <th>Download File</th>
     </tr>
  
-  {filesList.length > 0 ? (
-            filesList.map(
+  {fileListData.length > 0 ? (
+            fileListData.map(
               (data, index) => (
                 <tr key={data._id}> 
       <td>{index + 1}</td>

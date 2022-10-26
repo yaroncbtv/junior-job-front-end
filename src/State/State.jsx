@@ -115,5 +115,9 @@ export const State = {
       key: 'btnSearch', 
       default: 'Search', 
     }),
+    filesList:atom({
+      key: 'filesList', 
+      default: [], 
+    }),
 }
 

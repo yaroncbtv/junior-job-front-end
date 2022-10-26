@@ -12,6 +12,7 @@ import  FilesList  from './FilesList';
 const UploadCv = (props) => {
 
   const [userInfo] = useRecoilState(State.userInfo);
+  const [filesList, setFilesList] = useState(State.filesList);
 
   const [file, setFile] = useState(null); // state for storing actual image
   const [ ,setPreviewSrc] = useState(''); // state for storing previewImage
@@ -22,6 +23,18 @@ const UploadCv = (props) => {
   const [errorMsg, setErrorMsg] = useState('');
   const [ ,setIsPreviewAvailable] = useState(false); // state to show preview only for images
   const dropRef = useRef(); // React ref for managing the hover state of droppable area
+  
+  React.useEffect(() => {
+    FatchApi();
+  },[userInfo])
+
+  const FatchApi = React.useCallback(async () => {
+    if(userInfo._id != null){
+    const { data } = await axios.post(`${API_URL}/getAllFiles`, {userId:userInfo._id});
+    setErrorMsg('');
+    const arrayData = [data];
+    setFilesList(arrayData);}
+  })
 
   const handleInputChange = (event) => {
     setState({
@@ -52,7 +65,7 @@ const UploadCv = (props) => {
   };
 
   const handleOnSubmit = async (event) => {
-     //event.preventDefault();
+     event.preventDefault();
 
     try {
       const { title, description } = state;
@@ -65,11 +78,15 @@ const UploadCv = (props) => {
           formData.append('userId', userInfo._id);
 
           setErrorMsg('');
-          await axios.post(`${API_URL}/upload`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
+          
+          const res = await Promise.all([
+            await axios.post(`${API_URL}/upload`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }),
+            FatchApi(),
+          ]);
           props.history.push('/list');
         } else {
           setErrorMsg('Please select a file to add.');
@@ -203,8 +220,7 @@ const UploadCv = (props) => {
 
     </div>
     <div >
-      
-      <FilesList/>
+      <FilesList fileListData={filesList}/>
     </div>
     </>
   );
