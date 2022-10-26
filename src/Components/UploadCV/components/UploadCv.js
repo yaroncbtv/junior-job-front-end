@@ -9,9 +9,11 @@ import {
 import { State } from '../../../State/State';
 import JobsNavBar from "../../JobsNavBar";
 import  FilesList  from './FilesList';
+import {  getUserData } from "../../../services/authServices";
+
 const UploadCv = (props) => {
 
-  const [userInfo] = useRecoilState(State.userInfo);
+  const [userInfo, setUserInfo] = useRecoilState(State.userInfo);
   const [filesList, setFilesList] = useState(State.filesList);
 
   const [file, setFile] = useState(null); // state for storing actual image
@@ -34,6 +36,11 @@ const UploadCv = (props) => {
     setErrorMsg('');
     const arrayData = [data];
     setFilesList(arrayData);}
+  })
+  const UpdateUserData = React.useCallback(async () => {
+    const userData = await getUserData();
+    //console.log(userData)
+    await setUserInfo(userData);
   })
 
   const handleInputChange = (event) => {
@@ -86,6 +93,7 @@ const UploadCv = (props) => {
               }
             }),
             FatchApi(),
+            UpdateUserData()
           ]);
           props.history.push('/list');
         } else {
