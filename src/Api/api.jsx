@@ -123,6 +123,34 @@ export const getJobsThatUserLove = async (id) => {
     }
 };
 
+export const api = {
+    post: async (url, data) => {
+        return new Promise((resolve, reject) => {
+            axios
+                .post(url, data)
+                .then((response) => {
+                    resolve(response.data)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        })
+    },
+    get: async (url) => {
+        return new Promise((resolve, reject) => {
+            axios
+                .get(url)
+                .then((response) => {
+                    resolve(response.data)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        })
+    }
+}
+
+
 export const payPal = async () => {
     try {
         // const data = {
